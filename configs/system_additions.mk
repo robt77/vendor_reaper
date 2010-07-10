@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# init.d script support
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/bin/sysinit:system/bin/sysinit
+
+# Cylon-specific init file
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/etc/init.reaper.rc:root/init.reaper.rc
+
 # Security Enhanced Linux
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
