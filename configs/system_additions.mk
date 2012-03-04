@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Backup Tool
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/reaper/prebuilt/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/reaper/prebuilt/bin/50-base.sh:system/addon.d/50-base.sh
+
 # init.d script support
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
