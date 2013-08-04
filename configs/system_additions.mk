@@ -12,12 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include vendor/reaper/configs/aosp_fixes.mk
-include vendor/reaper/configs/reaper_main.mk
-include vendor/reaper/configs/system_additions.mk
-
-# Telephony packages
-PRODUCT_PACKAGES += \
-    Stk \
-    CellBroadcastReceiver
-
+# Security Enhanced Linux
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.selinux=1
