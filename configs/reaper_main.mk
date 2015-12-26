@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dysfunctional ROMs
+# Copyright (C) 2017 The Pure Nexus Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include pure telephony configuration
-include vendor/reaper/configs/reaper_phone.mk
+# Include overlays
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/reaper/overlay/common
 
-# Inherit AOSP device configuration for angler
-$(call inherit-product, device/huawei/angler/aosp_angler.mk)
-
-# Override AOSP build properties
-PRODUCT_NAME := angler
-PRODUCT_BRAND := google
-PRODUCT_DEVICE := angler
-PRODUCT_MODEL := Nexus 6P
-PRODUCT_MANUFACTURER := Huawei
-
-# Device Fingerprint
-
+# Main Required Packages
+PRODUCT_PACKAGES += \
+    Launcher3 \
+    LiveWallpapersPicker
