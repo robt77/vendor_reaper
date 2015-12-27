@@ -12,17 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include vendor/reaper/configs/aosp_fixes.mk
-include vendor/reaper/configs/reaper_main.mk
-include vendor/reaper/configs/system_additions.mk
-include vendor/reaper/configs/version.mk
+#Reaper versioning
+ifndef REAPER_BUILD_TYPE
+    REAPER_BUILD_TYPE := UNOFFICIAL
+endif
 
-# Telephony packages
-PRODUCT_PACKAGES += \
-    Stk \
-    CellBroadcastReceiver
+REAPER_BUILD_VERSION := 9.91
+REAPER_VERSION := build.v-$(REAPER_BUILD_VERSION)-$(REAPER_BUILD_TYPE)
 
-# Allow tethering without provisioning app
 PRODUCT_PROPERTY_OVERRIDES += \
-    net.tethering.noprovisioning=true
+    ro.reaper.version=$(REAPER_VERSION)
 
