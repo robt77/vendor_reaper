@@ -31,21 +31,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/slim/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/slim/prebuilt/common/bin/50-slim.sh:system/addon.d/50-slim.sh
+    vendor/reaper/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/reaper/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/reaper/prebuilt/common/bin/50-reaper.sh:system/addon.d/50-reaper.sh
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+    vendor/reaper/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
 
-# SLIM-specific init file
+# REAPER-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.local.rc:root/init.slim.rc
+    vendor/reaper/prebuilt/common/etc/init.local.rc:root/init.reaper.rc
 
 # SELinux filesystem labels
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
+    vendor/reaper/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -53,13 +53,13 @@ PRODUCT_COPY_FILES += \
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
-    vendor/slim/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
+    vendor/reaper/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/reaper/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/slim/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
-    vendor/slim/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/reaper/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/reaper/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/reaper/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # debug packages
 ifneq ($(TARGET_BUILD_VARIENT),user)
@@ -140,52 +140,42 @@ PRODUCT_BOOT_JARS += \
     telephony-ext
 
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/slim/overlay/common \
-    vendor/slim/overlay/dictionaries
+    vendor/reaper/overlay/common \
+    vendor/reaper/overlay/dictionaries
 
 # Versioning System
-# Slim version.
+# Reaper version.
 PRODUCT_VERSION_MAJOR = 7.1.0
 PRODUCT_VERSION_MINOR = build
 PRODUCT_VERSION_MAINTENANCE = 0.1
-ifdef SLIM_BUILD_EXTRA
-    SLIM_POSTFIX := -$(SLIM_BUILD_EXTRA)
+ifdef REAPER_BUILD_EXTRA
+    REAPER_POSTFIX := -$(REAPER_BUILD_EXTRA)
 endif
-ifndef SLIM_BUILD_TYPE
-    SLIM_BUILD_TYPE := UNOFFICIAL
+ifndef REAPER_BUILD_TYPE
+    REAPER_BUILD_TYPE := UNOFFICIAL
     PLATFORM_VERSION_CODENAME := UNOFFICIAL
 endif
 
-ifeq ($(SLIM_BUILD_TYPE),DM)
-    SLIM_POSTFIX := -$(shell date +"%Y%m%d")
+ifeq ($(REAPER_BUILD_TYPE),DM)
+    REAPER_POSTFIX := -$(shell date +"%Y%m%d")
 endif
 
-ifndef SLIM_POSTFIX
-    SLIM_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+ifndef REAPER_POSTFIX
+    REAPER_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 endif
 
-PLATFORM_VERSION_CODENAME := $(SLIM_BUILD_TYPE)
-
-# SlimIRC
-# export INCLUDE_SLIMIRC=1 for unofficial builds
-ifneq ($(filter WEEKLY OFFICIAL,$(SLIM_BUILD_TYPE)),)
-    INCLUDE_SLIMIRC = 1
-endif
-
-ifneq ($(INCLUDE_SLIMIRC),)
-    PRODUCT_PACKAGES += SlimIRC
-endif
+PLATFORM_VERSION_CODENAME := $(REAPER_BUILD_TYPE)
 
 # Set all versions
-SLIM_VERSION := Slim-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
-SLIM_MOD_VERSION := Slim-$(SLIM_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
+REAPER_VERSION := Reaper-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(REAPER_BUILD_TYPE)$(REAPER_POSTFIX)
+REAPER_MOD_VERSION := Reaper-$(REAPER_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(REAPER_BUILD_TYPE)$(REAPER_POSTFIX)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    slim.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.slim.version=$(SLIM_VERSION) \
-    ro.modversion=$(SLIM_MOD_VERSION) \
-    ro.slim.buildtype=$(SLIM_BUILD_TYPE)
+    reaper.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
+    ro.reaper.version=$(REAPER_VERSION) \
+    ro.modversion=$(REAPER_MOD_VERSION) \
+    ro.reaper.buildtype=$(REAPER_BUILD_TYPE)
 
-EXTENDED_POST_PROCESS_PROPS := vendor/slim/tools/slim_process_props.py
+EXTENDED_POST_PROCESS_PROPS := vendor/reaper/tools/reaper_process_props.py
 

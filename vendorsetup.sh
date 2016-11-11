@@ -1,3 +1,3 @@
-. "$(gettop)/vendor/slim/build/envsetup.sh"
+. "$(gettop)/vendor/reaper/build/envsetup.sh"
 
-slim_device_combos
+reaper_device_combos

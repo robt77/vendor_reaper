@@ -1,7 +1,7 @@
-# slim functions that extend build/envsetup.sh
-function __print_slim_functions_help() {
+# reaper functions that extend build/envsetup.sh
+function __print_reaper_functions_help() {
 cat <<EOF
-Additional SlimRoms functions:
+Additional ReaperRoms functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
@@ -10,13 +10,13 @@ Additional SlimRoms functions:
                    without deep dependencies. Requires the full build to have run before.
 - slimgerrit:      A Git wrapper that fetches/pushes patch from/to SLIM Gerrit Review.
 - slimrebase:      Rebase a Gerrit change and push it again.
-- slimremote:      Add a git remote for SLIM github repository.
+- reaperremote:    Add a git remote for REAPER github repository.
 - cmremote:        Add git remote pointing to the cm github repository.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
-- slimka:            Cleans and builds using mka.
+- reapermka:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
 - reposync:        Parallel repo sync using ionice and SCHED_BATCH.
@@ -26,12 +26,12 @@ Additional SlimRoms functions:
 EOF
 }
 
-function slim_device_combos()
+function reaper_device_combos()
 {
     local T list_file variant device
 
     T="$(gettop)"
-    list_file="${T}/vendor/slim/slim.devices"
+    list_file="${T}/vendor/reaper/reaper.devices"
     variant="userdebug"
 
     if [[ $1 ]]
@@ -53,45 +53,45 @@ function slim_device_combos()
     if [[ ! -f "${list_file}" ]]
     then
         echo "unable to find device list: ${list_file}"
-        list_file="${T}/vendor/slim/slim.devices"
+        list_file="${T}/vendor/reaper/reaper.devices"
         echo "defaulting device list file to: ${list_file}"
     fi
 
     while IFS= read -r device
     do
-        add_lunch_combo "slim_${device}-${variant}"
+        add_lunch_combo "reaper_${device}-${variant}"
     done < "${list_file}"
 }
 
-function slim_rename_function()
+function reaper_rename_function()
 {
-    eval "original_slim_$(declare -f ${1})"
+    eval "original_reaper_$(declare -f ${1})"
 }
 
-function _slim_build_hmm() #hidden
+function _reaper_build_hmm() #hidden
 {
     printf "%-8s %s" "${1}:" "${2}"
 }
 
-function slim_append_hmm()
+function reaper_append_hmm()
 {
-    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_slim_build_hmm "$1" "$2")")
+    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_reaper_build_hmm "$1" "$2")")
 }
 
-function slim_add_hmm_entry()
+function reaper_add_hmm_entry()
 {
     for c in ${!HMM_DESCRIPTIVE[*]}
     do
         if [[ "${1}" == $(echo "${HMM_DESCRIPTIVE[$c]}" | cut -f1 -d":") ]]
         then
-            HMM_DESCRIPTIVE[${c}]="$(_slim_build_hmm "$1" "$2")"
+            HMM_DESCRIPTIVE[${c}]="$(_reaper_build_hmm "$1" "$2")"
             return
         fi
     done
-    slim_append_hmm "$1" "$2"
+    reaper_append_hmm "$1" "$2"
 }
 
-function slimremote()
+function reaperremote()
 {
     local proj pfx project
 
@@ -100,7 +100,7 @@ function slimremote()
         echo "Not in a git directory. Please run this from an Android repository you wish to set up."
         return
     fi
-    git remote rm slim 2> /dev/null
+    git remote rm reaper 2> /dev/null
 
     proj="$(pwd -P | sed "s#$ANDROID_BUILD_TOP/##g")"
 
@@ -110,8 +110,8 @@ function slimremote()
 
     project="${proj//\//_}"
 
-    git remote add slim "git@github.com:SlimRoms/$pfx$project"
-    echo "Remote 'slim' created"
+    git remote add reaper "git@github.com:ReaperRoms/$pfx$project"
+    echo "Remote 'reaper' created"
 }
 
 function cmremote()
@@ -176,11 +176,11 @@ function cafremote()
     echo "Remote 'caf' created"
 }
 
-function slim_push()
+function reaper_push()
 {
     local branch ssh_name path_opt proj
     branch="lp5.1"
-    ssh_name="slim_review"
+    ssh_name="reaper_review"
     path_opt=
 
     if [[ "$1" ]]
@@ -198,20 +198,20 @@ function slim_push()
         proj="android_$proj"
     fi
 
-    git $path_opt push "ssh://${ssh_name}/SlimRoms/$proj" "HEAD:refs/for/$branch"
+    git $path_opt push "ssh://${ssh_name}/ReaperRoms/$proj" "HEAD:refs/for/$branch"
 }
 
 
-slim_rename_function hmm
+reaper_rename_function hmm
 function hmm() #hidden
 {
     local i T
     T="$(gettop)"
-    original_slim_hmm
+    original_reaper_hmm
     echo
 
-    echo "vendor/slim extended functions. The complete list is:"
-    for i in $(grep -P '^function .*$' "$T/vendor/slim/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
+    echo "vendor/reaper extended functions. The complete list is:"
+    for i in $(grep -P '^function .*$' "$T/vendor/reaper/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
         echo "$i"
     done |column
 }
@@ -232,10 +232,10 @@ function breakfast()
 {
     target=$1
     local variant=$2
-    SLIM_DEVICES_ONLY="true"
+    REAPER_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/slim/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/reaper/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -251,11 +251,11 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the SLIM model name
+            # This is probably just the REAPER model name
             if [ -z "$variant" ]; then
                 variant="userdebug"
             fi
-            lunch slim_$target-$variant
+            lunch reaper_$target-$variant
         fi
     fi
     return $?
@@ -266,8 +266,8 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        MODVERSION=$(get_build_var SLIM_VERSION)
-        ZIPFILE=slim-$MODVERSION.zip
+        MODVERSION=$(get_build_var REAPER_VERSION)
+        ZIPFILE=reaper-$MODVERSION.zip
         ZIPPATH=$OUT/$ZIPFILE
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
@@ -282,7 +282,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-    if (adb shell getprop ro.slim.device | grep -q "$SLIM_BUILD");
+    if (adb shell getprop ro.reaper.device | grep -q "$REAPER_BUILD");
     then
         # if adbd isn't root we can't write to /cache/recovery/
         adb root
@@ -304,7 +304,7 @@ EOF
     fi
     return $?
     else
-        echo "The connected device does not appear to be $SLIM_BUILD, run away!"
+        echo "The connected device does not appear to be $REAPER_BUILD, run away!"
     fi
 }
 
@@ -453,7 +453,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell getprop ro.slim.device | grep -q "$SLIM_BUILD");
+    if (adb shell getprop ro.reaper.device | grep -q "$REAPER_BUILD");
     then
         adb push $OUT/boot.img /cache/
         for i in $OUT/system/lib/modules/*;
@@ -464,7 +464,7 @@ function installboot()
         adb shell chmod 644 /system/lib/modules/*
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $SLIM_BUILD, run away!"
+        echo "The connected device does not appear to be $REAPER_BUILD, run away!"
     fi
 }
 
@@ -498,13 +498,13 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell getprop ro.slim.device | grep -q "$SLIM_BUILD");
+    if (adb shell getprop ro.reaper.device | grep -q "$REAPER_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $SLIM_BUILD, run away!"
+        echo "The connected device does not appear to be $REAPER_BUILD, run away!"
     fi
 }
 
@@ -524,8 +524,8 @@ function makerecipe() {
     if [ "$REPO_REMOTE" = "github" ]
     then
         pwd
-        slimremote
-        git push slim HEAD:refs/heads/'$1'
+        reaperremote
+        git push reaper HEAD:refs/heads/'$1'
     fi
     '
 }
@@ -826,7 +826,7 @@ function mka() {
     fi
 }
 
-function slimka() {
+function reapermka() {
     if [ ! -z "$1" ]; then
         for i in "$@"; do
             case $i in
@@ -924,7 +924,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop ro.slim.device | grep -q "$SLIM_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop ro.reaper.device | grep -q "$REAPER_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices | egrep '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+[^0-9]+' \
@@ -1024,7 +1024,7 @@ EOF
     fi
     return 0
     else
-        echo "The connected device does not appear to be $SLIM_BUILD, run away!"
+        echo "The connected device does not appear to be $REAPER_BUILD, run away!"
     fi
 }
 
@@ -1032,17 +1032,17 @@ alias mmp='dopush mm'
 alias mmmp='dopush mmm'
 alias mmap='dopush mma'
 alias mkap='dopush mka'
-alias slimkap='dopush slimka'
+alias reapermkap='dopush reapermka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/slim/build/tools/repopick.py $@
+    $T/vendor/reaper/build/tools/repopick.py $@
 }
 
 function fixup_common_out_dir() {
     common_out_dir=$(get_build_var OUT_DIR)/target/common
     target_device=$(get_build_var TARGET_DEVICE)
-    if [ ! -z $SLIM_FIXUP_COMMON_OUT ]; then
+    if [ ! -z $REAPER_FIXUP_COMMON_OUT ]; then
         if [ -d ${common_out_dir} ] && [ ! -L ${common_out_dir} ]; then
             mv ${common_out_dir} ${common_out_dir}-${target_device}
             ln -s ${common_out_dir}-${target_device} ${common_out_dir}
