@@ -84,7 +84,7 @@ PRODUCT_PACKAGES += \
 
 # Extra Optional packages
 PRODUCT_PACKAGES += \
-    SlimBootAnimation \
+    ReaperBootAnimation \
     SlimLauncher \
     ReaperWallpapers \
     LatinIME \
