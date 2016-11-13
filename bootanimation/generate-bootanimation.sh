@@ -21,7 +21,7 @@ mkdir -p $ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation/part{0..4}
 tar xvfp "$PWD/vendor/reaper/bootanimation/bootanimation.tar" --to-command="convert - -resize '$RESOLUTION' \"png8:$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation/\$TAR_FILENAME\""
 # create desc.txt
 echo "$RWIDTH" "$RHEIGHT" 60 > "$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation/desc.txt"
-cat "$PWD/vendor/slim/bootanimation/desc.txt" >> "$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation/desc.txt"
+cat "$PWD/vendor/reaper/bootanimation/desc.txt" >> "$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation/desc.txt"
 
 # create bootanimation.zip
 cd "$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/bootanimation"
