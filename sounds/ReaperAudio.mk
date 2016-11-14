@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := vendor/slim/sounds/material
+LOCAL_PATH := vendor/reaper/sounds/material
 
 define create-copy-media-files
 $(strip $(foreach fp,\
