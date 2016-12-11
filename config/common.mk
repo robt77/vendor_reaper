@@ -85,12 +85,13 @@ PRODUCT_PACKAGES += \
 # Extra Optional packages
 PRODUCT_PACKAGES += \
     ReaperBootAnimation \
-    SlimLauncher \
     ReaperWallpapers \
     LatinIME \
     BluetoothExt
 
-#    SlimFileManager removed until updated
+# Workaround for NovaLauncher zipalign fails
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
 
 ifneq ($(DISABLE_SLIM_FRAMEWORK), true)
 ## Slim Framework
