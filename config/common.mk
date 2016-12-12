@@ -93,11 +93,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
 
-ifneq ($(DISABLE_SLIM_FRAMEWORK), true)
-## Slim Framework
-include frameworks/opt/reaper/slim_framework.mk
-endif
-
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
 
