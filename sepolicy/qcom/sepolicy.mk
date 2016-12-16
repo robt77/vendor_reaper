@@ -1,2 +1,2 @@
 BOARD_SEPOLICY_DIRS += \
-    vendor/broken/sepolicy/qcom
+    vendor/reaper/sepolicy/qcom
