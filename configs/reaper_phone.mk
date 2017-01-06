@@ -13,6 +13,7 @@
 # limitations under the License.
 
 include vendor/reaper/configs/aosp_fixes.mk
+include vendor/reaper/configs/bootanimation.mk
 include vendor/reaper/configs/reaper_main.mk
 include vendor/reaper/configs/system_additions.mk
 include vendor/reaper/configs/version.mk
