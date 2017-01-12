@@ -92,6 +92,10 @@ PRODUCT_PACKAGES += \
 # Workaround for NovaLauncher zipalign fails
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
+    
+#Reaper Kernelauditor
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
