@@ -261,11 +261,11 @@ fi
 
 # lunch device
 echo -e ""
-echo -e ${bldgrn}"Getting your device"${txtrst}
+echo -e ${bldgrn}"Getting your junk"${txtrst}
 lunch "reaper_$device-userdebug";
 
 echo -e ""
-echo -e ${bldgrn}"Off like a prom dress"${txtrst}
+echo -e ${bldgrn}"Off like a head"${txtrst}
 
 # start compilation
 if [ "$opt_dex" -ne 0 ]; then
