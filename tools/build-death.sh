@@ -208,7 +208,7 @@ elif [ "$opt_clean" -eq 12 ]; then
     make experimental >/dev/null
     export EXPERIMENTAL=true
     echo -e ""
-    echo -e ${red}"Keep on steady breaking shit #StayDead"${txtrst}
+    echo -e ${red}"Keep on killing shit #StayDead"${txtrst}
     echo -e ""
 elif [ "$opt_clean" -eq 13 ]; then
     echo -e ${red}"Moving previously created final zips to FINAL folder"${txtrst}
@@ -218,7 +218,7 @@ elif [ "$opt_clean" -eq 13 ]; then
     make final >/dev/null
     export FINAL=true
     echo -e ""
-    echo -e ${red}"End of an era. Time for bigger badder shit. #StayDead"${txtrst}
+    echo -e ${red}"End of days. #StayDead"${txtrst}
     echo -e ""
 elif [ "$opt_clean" -eq 14 ]; then
     echo -e ${red}"Disabling ninja and jack for slower build boxes"${txtrst}
