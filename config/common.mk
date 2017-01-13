@@ -145,8 +145,6 @@ PRODUCT_PACKAGE_OVERLAYS += \
     vendor/reaper/overlay/common \
     vendor/reaper/overlay/dictionaries
 
-endif
-
 # ReaperOS freeze code
 ifeq ($(OFFICIAL),true)
 BUILD_TYPE = OFFICIAL
@@ -165,10 +163,11 @@ endif
 endif
 endif
 endif
-REAPER_VERSION_MAJOR = 7.1.0
-REAPER_VERSION_MINOR = build
-REAPER_POSTFIX := -$(shell date +"%Y%m%d")
+PRODUCT_VERSION_MAJOR = 7.1.0
+PRODUCT_VERSION_MINOR = build
 PRODUCT_VERSION_MAINTENANCE = v.5
+REAPER_BUILD_TYPE = $(BUILD_TYPE)
+REAPER_POSTFIX := -$(shell date +"%Y%m%d")
 
 ifeq ($(BUILD_TYPE),OFFICIAL)
     PLATFORM_VERSION_CODENAME := OFFICIAL
@@ -186,11 +185,9 @@ ifeq ($(BUILD_TYPE),UNSUPPORTED)
     PLATFORM_VERSION_CODENAME := UNSUPPORTED
 endif
 
-ifndef REAPER_POSTFIX
-    REAPER_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+ifdef REAPER_BUILD_EXTRA
+    REAPER_POSTFIX := -$(REAPER_BUILD_EXTRA)
 endif
-
-PLATFORM_VERSION_CODENAME := $(REAPER_BUILD_TYPE)
 
 # Set all versions
 REAPER_VERSION := Reaper-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(REAPER_BUILD_TYPE)$(REAPER_POSTFIX)
@@ -203,5 +200,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.modversion=$(REAPER_MOD_VERSION) \
     ro.reaper.buildtype=$(REAPER_BUILD_TYPE)
 
-EXTENDED_POST_PROCESS_PROPS := vendor/reaper/tools/reaper_process_props.py
+#EXTENDED_POST_PROCESS_PROPS := vendor/reaper/tools/reaper_process_props.py
 
