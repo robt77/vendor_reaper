@@ -90,14 +90,18 @@ PRODUCT_PACKAGES += \
     ReaperWallpapers \
     LatinIME \
     BluetoothExt
+    
+# Adaway
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/app/adaway/adaway.apk:system/app/adaway.apk    
 
-# Workaround for NovaLauncher zipalign fails
+# NovaLauncher 
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher/NovaLauncher.apk
     
-#Reaper Kernelauditor
+# Reaper Kernelauditor
 PRODUCT_COPY_FILES += \
-    vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk
+    vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk 
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
