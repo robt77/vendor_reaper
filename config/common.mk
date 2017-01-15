@@ -89,11 +89,12 @@ PRODUCT_PACKAGES += \
     ReaperBootAnimation \
     ReaperWallpapers \
     LatinIME \
-    BluetoothExt
+    BluetoothExt \
+    masquerade
     
 # Adaway
 PRODUCT_COPY_FILES += \
-    vendor/reaper/prebuilt/common/app/adaway/adaway.apk:system/app/adaway.apk    
+    vendor/reaper/prebuilt/common/app/AdAway/adaway.apk:system/app/adaway.apk    
 
 # NovaLauncher 
 PRODUCT_COPY_FILES += \
@@ -101,7 +102,11 @@ PRODUCT_COPY_FILES += \
     
 # Reaper Kernelauditor
 PRODUCT_COPY_FILES += \
-    vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk 
+    vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk
+    
+# Substratum
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/app/Substratum/Substratum.apk:system/app/Substratum/Substratum.apk 
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
@@ -148,6 +153,15 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/reaper/overlay/common \
     vendor/reaper/overlay/dictionaries
+    
+# Bootanimation
+ifeq ($(TARGET_BOOTANIMATION_480P),true)
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/media/bootanimation-480p.zip:system/media/bootanimation.zip
+else
+PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip
+endif    
 
 # ReaperOS freeze code
 ifeq ($(OFFICIAL),true)
