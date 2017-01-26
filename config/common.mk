@@ -89,7 +89,8 @@ PRODUCT_PACKAGES += \
     ReaperWallpapers \
     LatinIME \
     BluetoothExt \
-    masquerade
+    masquerade \
+    OmniStyle
     
 # Adaway
 PRODUCT_COPY_FILES += \
