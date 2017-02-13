@@ -29,7 +29,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/reaper/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/reaper/prebuilt/common/bin/50-reaper.sh:system/addon.d/50-reaper.sh
+    vendor/reaper/prebuilt/common/bin/50-reaper.sh:system/addon.d/50-broken.sh \
+    vendor/reaper/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/reaper/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
