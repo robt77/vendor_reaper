@@ -103,10 +103,6 @@ PRODUCT_COPY_FILES += \
 # Reaper Kernelauditor
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/common/app/ReaperKA/ReaperKernelAdiutor.apk:system/app/ReaperKernelAdiutor/ReaperKernelAdiutor.apk
-    
-# Substratum
-PRODUCT_COPY_FILES += \
-    vendor/reaper/prebuilt/common/app/Substratum/Substratum.apk:system/app/Substratum/Substratum.apk 
 
 ## Don't compile SystemUITests
 EXCLUDE_SYSTEMUI_TESTS := true
