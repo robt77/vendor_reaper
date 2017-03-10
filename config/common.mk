@@ -91,7 +91,7 @@ PRODUCT_PACKAGES += \
     ReaperWallpapers \
     LatinIME \
     BluetoothExt \
-    masquerade \
+    ThemeInterfacer \
     OmniStyle
     
 # Adaway
