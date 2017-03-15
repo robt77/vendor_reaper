@@ -92,7 +92,8 @@ PRODUCT_PACKAGES += \
     LatinIME \
     BluetoothExt \
     ThemeInterfacer \
-    OmniStyle
+    OmniStyle \
+    OmniJaws
     
 # Adaway
 PRODUCT_COPY_FILES += \
