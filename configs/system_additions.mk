@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Prebuilt apps
+$(call inherit-product-if-exists, vendor/cylon/prebuilt/prebuilt.mk)
+
 # Backup Tool
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/bin/backuptool.sh:install/bin/backuptool.sh \
