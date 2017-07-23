@@ -25,3 +25,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librsjni
 
+# Custom Packages
+PRODUCT_PACKAGES += \
+    MatLog
