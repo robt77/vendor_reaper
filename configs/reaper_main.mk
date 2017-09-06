@@ -27,4 +27,6 @@ PRODUCT_PACKAGES += \
 
 # Custom Packages
 PRODUCT_PACKAGES += \
-    MatLog
+    MatLog \
+    Terminal
+
