@@ -14,9 +14,10 @@
 
 # init.d script support
 PRODUCT_COPY_FILES += \
+    vendor/reaper/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
     vendor/reaper/prebuilt/bin/sysinit:system/bin/sysinit
 
-# Cylon-specific init file
+# Reaper-specific init file
 PRODUCT_COPY_FILES += \
     vendor/reaper/prebuilt/etc/init.reaper.rc:root/init.reaper.rc
 

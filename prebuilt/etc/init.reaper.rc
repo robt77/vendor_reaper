@@ -1,7 +1,6 @@
 # Reaper Extras
 
-on post-fs-data
-    # Run sysinit
+on boot
     start sysinit
 
 # sysinit (/system/etc/init.d)
