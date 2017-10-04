@@ -26,3 +26,8 @@ PRODUCT_MODEL := Nexus 5X
 PRODUCT_MANUFACTURER := LGE
 
 # Device Fingerprint
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=bullhead \
+    BUILD_FINGERPRINT="google/bullhead/bullhead:8.0.0/OPR4.170623.009/4302492/release-keys" \
+    PRIVATE_BUILD_DESC="bullhead-user 8.0.0 OPR4.170623.009 4302492 release-keys"
+
