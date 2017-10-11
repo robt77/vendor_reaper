@@ -10,9 +10,8 @@ ifeq (linux,$(HOST_OS))
     ifeq (true,$(SDCLANG))
         PROP_CLANG_VERSION := $(shell $(SDCLANG_PATH)/clang --version | grep "Snapdragon " | cut -d ' ' -f 1,2,5 2>&1 --output-delimiter="-")
     else
-        PROP_CLANG_VERSION := $(shell prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(LLVM_PREBUILTS_VERSION)/bin/clang --version | grep "clang " | cut -d ' ' -f 3 2>&1)
-        PROP_CLANG_DATE := $(shell git -C prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(LLVM_PREBUILTS_VERSION) log -1 --format="%s" | cut -d ' ' -f 3 2>&1)
-        PROP_CLANG_DATE := $(filter 20150% 20151% 20160% 20161% 20170% 20171% 20180% 20181%,$(PROP_CLANG_DATE))
+        PROP_CLANG_VERSION := $(shell prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(LLVM_PREBUILTS_VERSION)/bin/clang --version | grep "clang " | cut -d ' ' -f 4 2>&1)
+        PROP_CLANG_DATE := $(shell git -C prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(LLVM_PREBUILTS_VERSION) log -1 --date=format:'%Y%m%d' | grep "Date" | cut -d ' ' -f 4 2>&1)
     endif
     ifneq ($(PROP_CLANG_DATE),)
         PROP_CLANG_TEXT := $(PROP_CLANG_VERSION)-$(PROP_CLANG_DATE)
