@@ -25,6 +25,10 @@ PRODUCT_DEVICE := angler
 PRODUCT_MODEL := Nexus 6P
 PRODUCT_MANUFACTURER := Huawei
 
+# Reaper Device Maintainer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.reaper.maintainer="drgroovestarr"
+
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=angler \
