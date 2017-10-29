@@ -14,4 +14,6 @@
 
 # Prebuilt Packages
 PRODUCT_PACKAGES += \
+    Nova \
+    NovaGoogleCompanion \
     Turbo

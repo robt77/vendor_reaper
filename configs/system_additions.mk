@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Prebuilt apps
-$(call inherit-product-if-exists, vendor/cylon/prebuilt/prebuilt.mk)
+$(call inherit-product-if-exists, vendor/reaper/prebuilt/prebuilt.mk)
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
