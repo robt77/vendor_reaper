@@ -18,4 +18,5 @@ PRODUCT_PACKAGES += \
     Amaze \
     Nova \
     NovaGoogleCompanion \
+    Substratum \
     Turbo
