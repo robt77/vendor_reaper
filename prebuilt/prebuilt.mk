@@ -16,6 +16,7 @@
 PRODUCT_PACKAGES += \
     AdAway \
     Amaze \
+    KernelAdiutor \
     Nova \
     NovaGoogleCompanion \
     Substratum \
