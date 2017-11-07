@@ -14,6 +14,7 @@
 
 # Prebuilt Packages
 PRODUCT_PACKAGES += \
+    AdAway \
     Nova \
     NovaGoogleCompanion \
     Turbo
